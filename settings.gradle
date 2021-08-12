@@ -1,0 +1,1 @@
+include ':app', ':app', ':dataprocessing', ':network', ':core', ':cache', ':models', ':androidsystem'

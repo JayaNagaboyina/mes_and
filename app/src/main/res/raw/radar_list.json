@@ -1,0 +1,212 @@
+{
+	"KTLX": {
+		"state": "OK",
+		"name": "Oklahoma City",
+		"latitude": 35.3331,
+		"longitude": -97.2778,
+		"southWest": {
+			"latitude": 30.818,
+			"longitude": -102.723
+		},
+		"northEast": {
+			"latitude": 39.614,
+			"longitude": -91.833
+		}
+	},
+	"KINX": {
+		"state": "OK",
+		"latitude": 36.175,
+		"longitude": -95.5647,
+		"name": "Tulsa",
+		"southWest": {
+			"latitude": 31.6395,
+			"longitude": -100.96762
+		},
+		"northEast": {
+			"latitude": 40.461,
+			"longitude": -90.16038
+		}
+	},
+	"KFDR": {
+		"state": "OK",
+		"longitude": -98.9764,
+		"latitude": 34.3622,
+		"name": "Frederick",
+		"southWest": {
+			"latitude": 29.77,
+			"longitude": -104.394
+		},
+		"northEast": {
+			"latitude": 38.714,
+			"longitude": -93.56
+		}
+	},
+	"KVNX": {
+		"state": "OK",
+		"longitude": -98.1278,
+		"latitude": 36.7408,
+		"name": "Vance AFB",
+		"southWest": {
+			"latitude": 32.253,
+			"longitude": -103.562
+		},
+		"northEast": {
+			"latitude": 40.975,
+			"longitude": -92.694
+		}
+	},
+	"KDDC": {
+		"state": "KS",
+		"latitude": 37.761,
+		"longitude": -99.969,
+		"name": "Dodge City, KS",
+		"southWest": {
+			"latitude": 33.269,
+			"longitude": -105.352
+		},
+		"northEast": {
+			"latitude": 41.996,
+			"longitude": -94.586
+		}
+	},
+	"KICT": {
+		"state": "KS",
+		"latitude": 37.6547,
+		"longitude": -97.4428,
+		"name": "Wichita, KS",
+		"southWest": {
+			"latitude": 33.222,
+			"longitude": -102.835
+		},
+		"northEast": {
+			"latitude": 41.84,
+			"longitude": -92.047
+		}
+	},
+	"KSGF": {
+		"state": "MO",
+		"latitude": 37.2353,
+		"longitude": -93.4006,
+		"name": "Springfield, MO",
+		"southWest": {
+			"latitude": 32.791,
+			"longitude": -98.84
+		},
+		"northEast": {
+			"latitude": 41.44,
+			"longitude": -87.96
+		}
+	},
+	"KSRX": {
+		"state": "AR",
+		"latitude": 35.2906,
+		"longitude": -94.3617,
+		"name": "Fort Smith, AR",
+		"southWest": {
+			"latitude": 30.758,
+			"longitude": -99.804
+		},
+		"northEast": {
+			"latitude": 39.582,
+			"longitude": -88.92
+		}
+	},
+	"KLZK": {
+		"state": "AR",
+		"latitude": 34.8364,
+		"longitude": -92.2622,
+		"name": "Little Rock, AR",
+		"southWest": {
+			"latitude": 30.263,
+			"longitude": -97.677
+		},
+		"northEast": {
+			"latitude": 39.17,
+			"longitude": -86.847
+		}
+	},
+	"KSHV": {
+		"state": "LA",
+		"latitude": 32.4508,
+		"longitude": -93.8414,
+		"name": "Shreveport, LA",
+		"southWest": {
+			"latitude": 27.755,
+			"longitude": -99.23
+		},
+		"northEast": {
+			"latitude": 36.916,
+			"longitude": -88.45
+		}
+	},
+	"KFWS": {
+		"state": "TX",
+		"latitude": 32.5731,
+		"longitude": -97.3031,
+		"name": "Fort Worth, TX",
+		"southWest": {
+			"latitude": 27.886,
+			"longitude": -102.721
+		},
+		"northEast": {
+			"latitude": 37.023,
+			"longitude": -91.885
+		}
+	},
+	"KDYX": {
+		"state": "TX",
+		"latitude": 32.5383,
+		"longitude": -99.2544,
+		"name": "Dyess AFB, TX",
+		"southWest": {
+			"latitude": 27.851,
+			"longitude": -104.679
+		},
+		"northEast": {
+			"latitude": 36.99,
+			"longitude": -93.829
+		}
+	},
+	"KLBB": {
+		"state": "TX",
+		"latitude": 33.6542,
+		"longitude": -101.8142,
+		"name": "Lubbock, TX",
+		"southWest": {
+			"latitude": 29.022,
+			"longitude": -107.258
+		},
+		"northEast": {
+			"latitude": 38.04,
+			"longitude": -96.358
+		}
+	},
+	"KAMA": {
+		"state": "TX",
+		"latitude": 35.2333,
+		"longitude": -101.7092,
+		"name": "Amarillo, TX",
+		"southWest": {
+			"latitude": 30.65,
+			"longitude": -107.148
+		},
+		"northEast": {
+			"latitude": 39.563,
+			"longitude": -96.27
+		}
+	},
+	"KPUX": {
+		"state": "CO",
+		"latitude": 38.4594,
+		"longitude": -104.1814,
+		"name": "Pueblo, CO",
+		"southWest": {
+			"latitude": 34.05,
+			"longitude": -109.533
+		},
+		"northEast": {
+			"latitude": 42.62,
+			"longitude": -98.829
+		}
+	}
+}

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/listBackgroundColor">
+
+
+        <androidx.drawerlayout.widget.DrawerLayout
+            android:id="@+id/drawer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:elevation="8dp"
+                    android:background="@color/toolbarBackgroundColor"
+                    android:title="Mesonet"
+                    android:titleTextColor="@color/whiteTextColor"
+                    app:titleTextColor="@color/whiteTextColor"/>
+
+                <com.google.android.material.bottomnavigation.BottomNavigationView
+                    android:id="@+id/bottomNav"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:elevation="8dp"
+                    android:background="@color/navBackground"
+                    app:itemBackground="@color/navBackground"
+                    app:itemTextColor="@color/nav_selector"
+                    app:itemIconTint="#333"
+                    app:menu="@menu/bottom_nav_menu"
+                    android:layout_alignParentBottom="true"/>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/fragmentLayout"
+                    android:layout_below="@id/toolBar"
+                    android:layout_above="@+id/bottomNav"/>
+
+            </RelativeLayout>
+
+            <com.google.android.material.navigation.NavigationView
+                android:id="@+id/drawerNavView"
+                android:layout_width="250dp"
+                android:padding="16dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:background="@android:color/background_dark"
+                app:menu="@menu/main_menu"/>
+        </androidx.drawerlayout.widget.DrawerLayout>
+
+    </LinearLayout>
+</layout>

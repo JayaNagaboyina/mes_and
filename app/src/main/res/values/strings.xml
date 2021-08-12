@@ -1,0 +1,23 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name" tools:override="true">Mesonet</string>
+
+    <string name="currentFeelsLike">Feels Like</string>
+    <string name="currentDewpoint">Dewpoint</string>
+    <string name="currentWind">Wind</string>
+    <string name="current24HrRain">24-hr Rainfall</string>
+    <string name="currentHumidity">Humidity</string>
+    <string name="currentWindGusts">Wind Gusts</string>
+    <string name="currentPressure">Pressure</string>
+    <string name="MetricUnits">Metric Units</string>
+    <string name="ImperialUnits">Imperial Units</string>
+    <string name="UserSettings">User settings</string>
+    <string name="Contact">Contact</string>
+    <string name="AboutAndTermsOfUse">About and Terms of Use</string>
+
+    <string name="open">open</string>
+    <string name="close">close</string>
+
+    <string name="twitterId">\@okmesonet</string>
+
+    <string name="mapbox_access_token">pk.eyJ1Ijoib2ttZXNvbmV0IiwiYSI6ImNqaTUxNHc2dTBmNjQzcGx0bmxsZ2kwcTAifQ.HGGhaB6D-16JwLRh0YnXBw</string>
+</resources>

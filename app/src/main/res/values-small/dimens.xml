@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="max_mesonet_time_size">16sp</dimen>
+    <dimen name="mesonet_data_padding">2dp</dimen>
+    <dimen name="mesonet_space_between_columns">16dp</dimen>
+    <dimen name="max_forecast_time_size">18sp</dimen>
+    <dimen name="forecast_data_padding_port">24dp</dimen>
+    <dimen name="forecast_data_padding_land">24dp</dimen>
+    <dimen name="forecast_scroll_arrow_size">32dp</dimen>
+    <dimen name="recycler_view_margin">18dp</dimen>
+    <dimen name="fastscroll__handle_clickable_width">16dp</dimen>
+</resources>

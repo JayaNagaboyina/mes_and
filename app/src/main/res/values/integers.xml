@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="forecastsPerPage">2</integer>
+
+    <integer name="radarLegendPadViewWeight">6096131</integer>
+    <integer name="radarLegendNonPrecipWeight">30011723</integer>
+    <integer name="radarLegendLightWeight">11606096</integer>
+    <integer name="radarLegendModerateWeight">18053927</integer>
+    <integer name="radarLegendHeavyWeight">34232121</integer>
+</resources>

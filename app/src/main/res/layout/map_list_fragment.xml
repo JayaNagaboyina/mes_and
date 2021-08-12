@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+            <!--<android.support.v4.widget.NestedScrollView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
+           <FrameLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/listBackgroundColor">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/groupNameToolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:visibility="gone"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/dividerColor"/>
+
+                    <org.mesonet.app.baseclasses.RecyclerView
+                        android:id="@+id/mapList"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:nestedScrollingEnabled="true"
+                        />
+
+             </LinearLayout>
+            </FrameLayout>
+        <!--</android.support.v4.widget.NestedScrollView>-->
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_centerInParent="true"
+            android:indeterminateTint="@color/lightTextColor"/>
+
+        <TextView
+            android:id="@+id/emptyListText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@color/lightTextColor"
+            android:textSize="20sp"
+            android:text="Maps Unavailable"
+            android:visibility="gone"/>
+    </RelativeLayout>
+</layout>

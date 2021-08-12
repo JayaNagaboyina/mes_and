@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:mapbox="http://schemas.android.com/tools">
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/radarLayout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/legend"
+                android:src="@drawable/map_legend"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:scaleType="fitXY" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="@integer/radarLegendPadViewWeight"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="@integer/radarLegendNonPrecipWeight"
+                    android:text="Non-Precip"
+                    android:textStyle="bold"
+                    android:textColor="@color/whiteTextColor"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="@integer/radarLegendLightWeight"
+                    android:text="Light"
+                    android:textStyle="bold"
+                    android:textColor="@color/whiteTextColor"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="@integer/radarLegendModerateWeight"
+                    android:text="Moderate"
+                    android:textStyle="bold"
+                    android:textColor="@color/whiteTextColor"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="@integer/radarLegendHeavyWeight"
+                    android:text="Heavy"
+                    android:textStyle="bold"
+                    android:textColor="@color/whiteTextColor"/>
+
+            </LinearLayout>
+
+            <!--<com.mapbox.mapboxsdk.maps.MapView-->
+            <!--android:id="@+id/map"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--mapbox:mapbox_styleUrl="mapbox://styles/okmesonet/cjic5xvsd02xl2sp7sh1eljuj" />-->
+            <RelativeLayout
+                android:id="@+id/readingInfoLayout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/radarInfoLayoutHeight"
+                android:layout_alignParentBottom="true"
+                android:background="@color/cardview_dark_background"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/changeLocationButton"
+                    android:layout_margin="6dp"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_near_me_black_24dp"
+                    android:tint="@color/lightBlue"
+                    android:background="@color/cardview_dark_background"
+                    android:textAllCaps="true" />
+
+                <TextView
+                    android:id="@+id/readingInfoTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:layout_toEndOf="@+id/changeLocationButton"
+                    android:textColor="@color/whiteTextColor" />
+
+                <LinearLayout
+                    android:id="@+id/opacityDrawerButtonLayout"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="center"
+                    android:background="@drawable/opacity_bar_background">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/opacity_bar_background"
+                        android:src="@drawable/ic_navigate_before_white_24dp"
+                        android:tint="@color/lightBlue"/>
+
+                    <TextView
+                        android:id="@+id/overlayOpacityText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:textAllCaps="true"
+                        android:text="OVERLAY OPACITY"
+                        android:textColor="@color/whiteTextColor"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/opacityLayout"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:clickable="true"
+                    android:background="@drawable/opacity_bar_background"
+                    android:layoutDirection="rtl">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layoutDirection="ltr">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAllCaps="true"
+                            android:text="0%"
+                            android:textColor="@color/whiteTextColor"/>
+
+                        <SeekBar
+                            android:id="@+id/transparencySeekBar"
+                            android:layout_width="128dp"
+                            android:layout_height="wrap_content"
+                            android:thumbTint="@color/lightBlue"
+                            android:progressTint="@color/lightBlue"
+                            android:progressBackgroundTint="#8fff"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAllCaps="true"
+                            android:text="100%"
+                            android:textColor="@color/whiteTextColor"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/opacityCloseButton"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layoutDirection="ltr">
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@drawable/opacity_bar_background"
+                            android:src="@drawable/ic_navigate_next_white_24dp"
+                            android:tint="@color/lightBlue"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:textAllCaps="true"
+                            android:text="OVERLAY OPACITY"
+                            android:textColor="@color/whiteTextColor"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <FrameLayout
+                android:id="@+id/mapContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/legend"
+                android:layout_above="@id/readingInfoLayout"/>
+        </RelativeLayout>
+
+        <org.mesonet.app.radar.PlayPauseButton
+            android:id="@+id/playPauseButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:backgroundTint="#40A960"
+            app:layout_anchor="@id/mapContainer"
+            app:layout_anchorGravity="bottom|end"
+            android:layout_marginBottom="@dimen/radarPlayPauseFabBottomMargin"
+            android:layout_marginEnd="16dp"
+            android:elevation="4dp"
+            android:visibility="gone"/>
+
+        <FrameLayout
+            android:id="@+id/childFragmentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/whiteTextColor"
+            android:visibility="gone"/>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

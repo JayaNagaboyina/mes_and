@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:mapbox="http://schemas.android.com/tools">
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/radarLayout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!--<ImageButton-->
+                <!--android:id="@+id/opacityToggleButton"-->
+                <!--android:layout_width="28dp"-->
+                <!--android:layout_height="28dp"-->
+                <!--android:layout_alignParentEnd="true"-->
+                <!--android:scaleType="fitXY"-->
+                <!--android:src="@drawable/baseline_opacity_white_36"-->
+                <!--android:background="@color/cardview_dark_background"/>-->
+            <FrameLayout
+                android:id="@+id/legendTransparencyLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <SeekBar
+                    android:id="@+id/transparencySeekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="28dp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
+                    android:background="@color/cardview_dark_background"
+                    android:visibility="invisible"/>
+
+                <ImageView
+                    android:id="@+id/legend"
+                    android:src="@drawable/map_legend"
+                    android:layout_width="match_parent"
+                    android:layout_height="28dp"
+                    android:scaleType="fitXY" />
+            </FrameLayout>
+
+            <!--<com.mapbox.mapboxsdk.maps.MapView-->
+            <!--android:id="@+id/map"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--mapbox:mapbox_styleUrl="mapbox://styles/okmesonet/cjic5xvsd02xl2sp7sh1eljuj" />-->
+            <RelativeLayout
+                android:id="@+id/readingInfoLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@color/cardview_dark_background">
+
+                <!--<Button-->
+                <!--android:id="@+id/changeLocationButton"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentEnd="true"-->
+                <!--android:text="Change"-->
+                <!--android:textAllCaps="true"-->
+                <!--style="@android:style/Widget.Material.Button.Borderless"/>-->
+
+                <TextView
+                    android:id="@+id/readingInfoTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:textColor="@color/whiteTextColor"/>
+
+            </RelativeLayout>
+
+            <FrameLayout
+                android:id="@+id/mapContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/legendTransparencyLayout"
+                android:layout_above="@id/readingInfoLayout"/>
+        </RelativeLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/radarLocationFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_place_white_36"
+            app:layout_anchor="@+id/mapContainer"
+            app:layout_anchorGravity="bottom|end"
+            app:fabSize="mini"
+            android:layout_marginBottom="24dp"
+            android:layout_marginEnd="24dp"
+            android:elevation="4dp"
+            android:visibility="gone"/>
+
+        <org.mesonet.app.radar.PlayPauseButton
+            android:id="@+id/playPauseButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_anchor="@id/mapContainer"
+            app:layout_anchorGravity="bottom|end"
+            android:layout_marginBottom="@dimen/radarPlayPauseFabBottomMargin"
+            android:layout_marginEnd="16dp"
+            android:elevation="4dp"
+            android:visibility="gone"/>
+
+        <FrameLayout
+            android:id="@+id/childFragmentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/whiteTextColor"
+            android:visibility="gone"/>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

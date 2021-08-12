@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black">
+        <androidx.appcompat.widget.Toolbar
+            style="@style/WhiteToolbarTheme"
+            android:id="@+id/siteSelectionToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/searchText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textCursorDrawable="@null"
+                android:inputType="text"
+                android:imeOptions="actionDone"
+                android:backgroundTint="@color/lightTextColor"
+                android:selectAllOnFocus="true"/>
+        </androidx.appcompat.widget.Toolbar>
+
+        <org.mesonet.app.baseclasses.RecyclerView
+            android:id="@+id/searchList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/siteSelectionToolbar"
+            android:nestedScrollingEnabled="true"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginEnd="24dp"/>
+       <com.futuremind.recyclerviewfastscroll.FastScroller
+           android:id="@+id/fastscroll"
+           android:orientation="vertical"
+           android:layout_width="wrap_content"
+           android:layout_height="match_parent"
+           android:layout_alignParentEnd="true"
+           android:layout_below="@id/siteSelectionToolbar"
+           android:layout_marginTop="2dp"
+           android:layout_marginEnd="6dp"
+           android:scrollbarTrackVertical="@color/lightTextColor"
+           app:fastscroll__handleColor="@color/colorPrimary"
+           app:fastscroll__bubbleColor="@color/colorPrimary"
+           app:fastscroll__bubbleTextAppearance="@style/StyledScrollerTextAppearance"
+           />
+
+    </RelativeLayout>
+</layout>

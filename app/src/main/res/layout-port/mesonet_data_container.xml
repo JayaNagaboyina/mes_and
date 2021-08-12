@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="displayFields"
+            type="org.mesonet.dataprocessing.site.mesonetdata.MesonetUIController.MesonetDisplayFields"/>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:padding="2dp"
+        android:layout_height="0dp">
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            card_view:cardBackgroundColor="@color/mesoBackground"
+            card_view:cardElevation="4dp"
+            card_view:cardUseCompatPadding="true"
+            app:cardBackgroundColor="@color/mesoBackground"
+            app:cardElevation="4dp"
+            app:cardUseCompatPadding="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/siteToolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/mesoBackground"
+                    android:elevation="2dp"
+                    android:layout_alignParentTop="true"
+                    android:titleTextAppearance="@style/MesonetCardToolbarStyle"
+                    app:titleTextAppearance="@style/MesonetCardToolbarStyle"
+                    android:title="@{displayFields.GetStationName()}"
+                    app:title="@{displayFields.GetStationName()}"/>
+
+                <!--<Toolbar-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@android:color/black"/>-->
+
+                <!--<Toolbar-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="#153679"/>-->
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/siteToolbar">
+
+                    <include android:id="@+id/mesonetData"
+                        layout="@layout/mesonet_data_layout"
+                        app:displayFields="@{displayFields}"/>
+
+                    <TextView
+                        android:id="@+id/mesonetErrorText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:textColor="@color/whiteTextColor"
+                        android:layout_centerInParent="true"
+                        android:visibility="gone"/>
+                </RelativeLayout>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+</layout>

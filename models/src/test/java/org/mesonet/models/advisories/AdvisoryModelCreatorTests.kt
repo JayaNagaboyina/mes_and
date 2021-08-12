@@ -1,0 +1,691 @@
+package org.mesonet.models.advisories
+
+import junit.framework.TestCase.*
+import org.junit.Test
+import java.util.*
+import javax.inject.Inject
+
+class AdvisoryModelCreatorTests @Inject constructor()
+{
+    var mAdvisoryCreator = AdvisoryModelConverterFactory()
+
+    @Test fun EmptyAdvisoryFileTest()
+    {
+        val advisory = mAdvisoryCreator.ParseAdvisoryFile("")
+
+        assertNotNull(advisory)
+        assertEquals(advisory.size, 0)
+    }
+
+
+
+    @Test fun BadAdvisoryFileTest()
+    {
+        val advisory = mAdvisoryCreator.ParseAdvisoryFile("ERROR!!! ERROR!!! ERROR!!!")
+
+        assertNotNull(advisory)
+        assertEquals(advisory.size, 0)
+    }
+
+
+    @Test fun InterruptedAdvisoryFileTest1()
+    {
+        val advisory = mAdvisoryCreator.ParseAdvisoryFile("FF.A;1527116400;1526252400;1526252400;/2018/05/12/FFA/201805122254.KOTX_FFA_OTX.401.txt;WAC047;\n" +
+                "SE.W;1526212800;1526212800;1526212800;/2018/05/13/MWW/201805130315.KMFR_MWW_MFR.388.txt;PZZ356,PZZ376,PZZ370,PZZ350;\n" +
+                "SC.Y;1526212800;1526207400;1526207400;/2018/05/12/MWW/201805122119.KMFR_MWW_MFR.114.txt;PZZ350;\n" +
+                "WS.W;1526209200;1526209200;1526209200;/2018/05/12/WSW/201805122114.KRIW_WSW_RIW.644.txt;WYZ014,WYZ015,WYZ002;\n" +
+                "ERROR!!! ERROR!!! ERROR!!!\n" +
+                "WW.Y;1526209200;1526209200;1526209200;/2018/05/12/WSW/201805122114.KRIW_WSW_RIW.644.txt;WYZ012,WYZ024;\n" +
+                "FL.W;0;1526209380;0;/2018/05/12/FLS/201805122004.KTFX_FLS_TFX.505.txt;MTC001,MTC057;45.47,-112.71,45.59,-112.73,45.58,-112.65,45.48,-112.65\n" +
+                "FL.W;1526342400;1526218500;1526218500;/2018/05/12/FLS/201805122236.KTFX_FLS_TFX.554.txt;MTC007,MTC031;45.86,-111.62,45.88,-111.63,45.91,-111.61,45.92,-111.56,45.90,-111.54\n" +
+                "FA.W;1526325300;1526325300;1526325300;/2018/05/12/FLS/201805120743.KTFX_FLS_TFX.450.txt;MTC013;47.43,-111.47,47.39,-111.43,47.33,-111.41,47.25,-111.37,47.20,-111.34,47.14,-111.26,47.13,-111.30,47.16,-111.36,47.19,-111.41,47.24,-111.44,47.28,-111.46,47.35,-111.47,47.43,-111.50")
+
+        assertNotNull(advisory)
+        assertEquals(advisory.size, 8)
+        assertNotNull(advisory[0])
+        assertNotNull(advisory[0].GetType())
+        assertEquals(advisory[0].GetType(), AdvisoryModel.AdvisoryType.FF)
+        assertEquals(advisory[0].GetType().toString(), "Flash Flood")
+        assertNotNull(advisory[0].GetLevel())
+        assertEquals(advisory[0].GetLevel(), AdvisoryModel.AdvisoryLevel.A)
+        assertEquals(advisory[0].GetLevel().toString(), "Watch")
+        assertNotNull(advisory[0].GetFilePath())
+        assertEquals(advisory[0].GetFilePath(), "/2018/05/12/FFA/201805122254.KOTX_FFA_OTX.401.txt")
+        assertNotNull(advisory[0].GetCounties())
+        assertEquals(advisory[0].GetCounties(), Arrays.asList("WAC047"))
+
+        assertNotNull(advisory[1])
+        assertNotNull(advisory[1].GetType())
+        assertEquals(advisory[1].GetType(), AdvisoryModel.AdvisoryType.SE)
+        assertEquals(advisory[1].GetType().toString(), "Hazardous Seas")
+        assertNotNull(advisory[1].GetLevel())
+        assertEquals(advisory[1].GetLevel(), AdvisoryModel.AdvisoryLevel.W)
+        assertEquals(advisory[1].GetLevel().toString(), "Warning")
+        assertNotNull(advisory[1].GetFilePath())
+        assertEquals(advisory[1].GetFilePath(), "/2018/05/13/MWW/201805130315.KMFR_MWW_MFR.388.txt")
+        assertNotNull(advisory[1].GetCounties())
+        assertEquals(advisory[1].GetCounties(), Arrays.asList("PZZ356","PZZ376","PZZ370","PZZ350"))
+
+        assertNotNull(advisory[2])
+        assertNotNull(advisory[2].GetType())
+        assertEquals(advisory[2].GetType(), AdvisoryModel.AdvisoryType.SC)
+        assertEquals(advisory[2].GetType().toString(), "Small Craft")
+        assertNotNull(advisory[2].GetLevel())
+        assertEquals(advisory[2].GetLevel(), AdvisoryModel.AdvisoryLevel.Y)
+        assertEquals(advisory[2].GetLevel().toString(), "Advisory")
+        assertNotNull(advisory[2].GetFilePath())
+        assertEquals(advisory[2].GetFilePath(), "/2018/05/12/MWW/201805122119.KMFR_MWW_MFR.114.txt")
+        assertNotNull(advisory[2].GetCounties())
+        assertEquals(advisory[2].GetCounties(), Arrays.asList("PZZ350"))
+
+        assertNotNull(advisory[3])
+        assertNotNull(advisory[3].GetType())
+        assertEquals(advisory[3].GetType(), AdvisoryModel.AdvisoryType.WS)
+        assertEquals(advisory[3].GetType().toString(), "Winter Storm")
+        assertNotNull(advisory[3].GetLevel())
+        assertEquals(advisory[3].GetLevel(), AdvisoryModel.AdvisoryLevel.W)
+        assertEquals(advisory[3].GetLevel().toString(), "Warning")
+        assertNotNull(advisory[3].GetFilePath())
+        assertEquals(advisory[3].GetFilePath(), "/2018/05/12/WSW/201805122114.KRIW_WSW_RIW.644.txt")
+        assertNotNull(advisory[3].GetCounties())
+        assertEquals(advisory[3].GetCounties(), Arrays.asList("WYZ014","WYZ015","WYZ002"))
+
+        assertNotNull(advisory[4])
+        assertNotNull(advisory[4].GetType())
+        assertEquals(advisory[4].GetType(), AdvisoryModel.AdvisoryType.WW)
+        assertEquals(advisory[4].GetType().toString(), "Winter Weather")
+        assertNotNull(advisory[4].GetLevel())
+        assertEquals(advisory[4].GetLevel(), AdvisoryModel.AdvisoryLevel.Y)
+        assertEquals(advisory[4].GetLevel().toString(), "Advisory")
+        assertNotNull(advisory[4].GetFilePath())
+        assertEquals(advisory[4].GetFilePath(), "/2018/05/12/WSW/201805122114.KRIW_WSW_RIW.644.txt")
+        assertNotNull(advisory[4].GetCounties())
+        assertEquals(advisory[4].GetCounties(), Arrays.asList("WYZ012","WYZ024"))
+
+        assertNotNull(advisory[5])
+        assertNotNull(advisory[5].GetType())
+        assertEquals(advisory[5].GetType(), AdvisoryModel.AdvisoryType.FL)
+        assertEquals(advisory[5].GetType().toString(), "Flood")
+        assertNotNull(advisory[5].GetLevel())
+        assertEquals(advisory[5].GetLevel(), AdvisoryModel.AdvisoryLevel.W)
+        assertEquals(advisory[5].GetLevel().toString(), "Warning")
+        assertNotNull(advisory[5].GetFilePath())
+        assertEquals(advisory[5].GetFilePath(), "/2018/05/12/FLS/201805122004.KTFX_FLS_TFX.505.txt")
+        assertNotNull(advisory[5].GetCounties())
+        assertEquals(advisory[5].GetCounties(), Arrays.asList("MTC001","MTC057"))
+
+        assertNotNull(advisory[6])
+        assertNotNull(advisory[6].GetType())
+        assertEquals(advisory[6].GetType(), AdvisoryModel.AdvisoryType.FL)
+        assertEquals(advisory[6].GetType().toString(), "Flood")
+        assertNotNull(advisory[6].GetLevel())
+        assertEquals(advisory[6].GetLevel(), AdvisoryModel.AdvisoryLevel.W)
+        assertEquals(advisory[6].GetLevel().toString(), "Warning")
+        assertNotNull(advisory[6].GetFilePath())
+        assertEquals(advisory[6].GetFilePath(), "/2018/05/12/FLS/201805122236.KTFX_FLS_TFX.554.txt")
+        assertNotNull(advisory[6].GetCounties())
+        assertEquals(advisory[6].GetCounties(), Arrays.asList("MTC007","MTC031"))
+
+        assertNotNull(advisory[7])
+        assertNotNull(advisory[7].GetType())
+        assertEquals(advisory[7].GetType(), AdvisoryModel.AdvisoryType.FA)
+        assertEquals(advisory[7].GetType().toString(), "Areal Flood")
+        assertNotNull(advisory[7].GetLevel())
+        assertEquals(advisory[7].GetLevel(), AdvisoryModel.AdvisoryLevel.W)
+        assertEquals(advisory[7].GetLevel().toString(), "Warning")
+        assertNotNull(advisory[7].GetFilePath())
+        assertEquals(advisory[7].GetFilePath(), "/2018/05/12/FLS/201805120743.KTFX_FLS_TFX.450.txt")
+        assertNotNull(advisory[7].GetCounties())
+        assertEquals(advisory[7].GetCounties(), Arrays.asList("MTC013"))
+    }
+
+
+    @Test fun InterruptedAdvisoryFileTest2()
+    {
+        val advisory = mAdvisoryCreator.ParseAdvisoryFile("FF.A;1527116400;1526252400;1526252400;/2018/05/12/FFA/201805122254.KOTX_FFA_OTX.401.txt;WAC047;\n" +
+                "SE.W;1526212800;1526212800;1526212800;/2018/05/13/MWW/201805130315.KMFR_MWW_MFR.388.txt;PZZ356,PZZ376,PZZ370,PZZ350;\n" +
+                "SC.Y;1526212800;1526207400;1526207400;/2018/05/12/MWW/201805122119.KMFR_MWW_MFR.114.txt;PZZ350;\n" +
+                "WS.W;1526209200;1526209200;1526209200;/2018/05/12/WSW/201805122114.KRIW_WSW_RIW.644.txt;WYZ014,WYZ015,WYZ002;\n" +
+                "ERROR!!! ERROR!!! ERROR!!! " +
+                "WW.Y;1526209200;1526209200;1526209200;/2018/05/12/WSW/201805122114.KRIW_WSW_RIW.644.txt;WYZ012,WYZ024;\n" +
+                "FL.W;0;1526209380;0;/2018/05/12/FLS/201805122004.KTFX_FLS_TFX.505.txt;MTC001,MTC057;45.47,-112.71,45.59,-112.73,45.58,-112.65,45.48,-112.65\n" +
+                "FL.W;1526342400;1526218500;1526218500;/2018/05/12/FLS/201805122236.KTFX_FLS_TFX.554.txt;MTC007,MTC031;45.86,-111.62,45.88,-111.63,45.91,-111.61,45.92,-111.56,45.90,-111.54\n" +
+                "FA.W;1526325300;1526325300;1526325300;/2018/05/12/FLS/201805120743.KTFX_FLS_TFX.450.txt;MTC013;47.43,-111.47,47.39,-111.43,47.33,-111.41,47.25,-111.37,47.20,-111.34,47.14,-111.26,47.13,-111.30,47.16,-111.36,47.19,-111.41,47.24,-111.44,47.28,-111.46,47.35,-111.47,47.43,-111.50")
+
+        assertNotNull(advisory)
+        assertEquals(advisory.size, 8)
+        assertNotNull(advisory[0])
+        assertNotNull(advisory[0].GetType())
+        assertEquals(advisory[0].GetType(), AdvisoryModel.AdvisoryType.FF)
+        assertEquals(advisory[0].GetType().toString(), "Flash Flood")
+        assertNotNull(advisory[0].GetLevel())
+        assertEquals(advisory[0].GetLevel(), AdvisoryModel.AdvisoryLevel.A)
+        assertEquals(advisory[0].GetLevel().toString(), "Watch")
+        assertNotNull(advisory[0].GetFilePath())
+        assertEquals(advisory[0].GetFilePath(), "/2018/05/12/FFA/201805122254.KOTX_FFA_OTX.401.txt")
+        assertNotNull(advisory[0].GetCounties())
+        assertEquals(advisory[0].GetCounties(), Arrays.asList("WAC047"))
+
+        assertNotNull(advisory[1])
+        assertNotNull(advisory[1].GetType())
+        assertEquals(advisory[1].GetType(), AdvisoryModel.AdvisoryType.SE)
+        assertEquals(advisory[1].GetType().toString(), "Hazardous Seas")
+        assertNotNull(advisory[1].GetLevel())
+        assertEquals(advisory[1].GetLevel(), AdvisoryModel.AdvisoryLevel.W)
+        assertEquals(advisory[1].GetLevel().toString(), "Warning")
+        assertNotNull(advisory[1].GetFilePath())
+        assertEquals(advisory[1].GetFilePath(), "/2018/05/13/MWW/201805130315.KMFR_MWW_MFR.388.txt")
+        assertNotNull(advisory[1].GetCounties())
+        assertEquals(advisory[1].GetCounties(), Arrays.asList("PZZ356","PZZ376","PZZ370","PZZ350"))
+
+        assertNotNull(advisory[2])
+        assertNotNull(advisory[2].GetType())
+        assertEquals(advisory[2].GetType(), AdvisoryModel.AdvisoryType.SC)
+        assertEquals(advisory[2].GetType().toString(), "Small Craft")
+        assertNotNull(advisory[2].GetLevel())
+        assertEquals(advisory[2].GetLevel(), AdvisoryModel.AdvisoryLevel.Y)
+        assertEquals(advisory[2].GetLevel().toString(), "Advisory")
+        assertNotNull(advisory[2].GetFilePath())
+        assertEquals(advisory[2].GetFilePath(), "/2018/05/12/MWW/201805122119.KMFR_MWW_MFR.114.txt")
+        assertNotNull(advisory[2].GetCounties())
+        assertEquals(advisory[2].GetCounties(), Arrays.asList("PZZ350"))
+
+        assertNotNull(advisory[3])
+        assertNotNull(advisory[3].GetType())
+        assertEquals(advisory[3].GetType(), AdvisoryModel.AdvisoryType.WS)
+        assertEquals(advisory[3].GetType().toString(), "Winter Storm")
+        assertNotNull(advisory[3].GetLevel())
+        assertEquals(advisory[3].GetLevel(), AdvisoryModel.AdvisoryLevel.W)
+        assertEquals(advisory[3].GetLevel().toString(), "Warning")
+        assertNotNull(advisory[3].GetFilePath())
+        assertEquals(advisory[3].GetFilePath(), "/2018/05/12/WSW/201805122114.KRIW_WSW_RIW.644.txt")
+        assertNotNull(advisory[3].GetCounties())
+        assertEquals(advisory[3].GetCounties(), Arrays.asList("WYZ014","WYZ015","WYZ002"))
+
+        assertNotNull(advisory[4])
+        assertNotNull(advisory[4].GetType())
+        assertEquals(advisory[4].GetType(), AdvisoryModel.AdvisoryType.WW)
+        assertEquals(advisory[4].GetType().toString(), "Winter Weather")
+        assertNotNull(advisory[4].GetLevel())
+        assertEquals(advisory[4].GetLevel(), AdvisoryModel.AdvisoryLevel.Y)
+        assertEquals(advisory[4].GetLevel().toString(), "Advisory")
+        assertNotNull(advisory[4].GetFilePath())
+        assertEquals(advisory[4].GetFilePath(), "/2018/05/12/WSW/201805122114.KRIW_WSW_RIW.644.txt")
+        assertNotNull(advisory[4].GetCounties())
+        assertEquals(advisory[4].GetCounties(), Arrays.asList("WYZ012","WYZ024"))
+
+        assertNotNull(advisory[5])
+        assertNotNull(advisory[5].GetType())
+        assertEquals(advisory[5].GetType(), AdvisoryModel.AdvisoryType.FL)
+        assertEquals(advisory[5].GetType().toString(), "Flood")
+        assertNotNull(advisory[5].GetLevel())
+        assertEquals(advisory[5].GetLevel(), AdvisoryModel.AdvisoryLevel.W)
+        assertEquals(advisory[5].GetLevel().toString(), "Warning")
+        assertNotNull(advisory[5].GetFilePath())
+        assertEquals(advisory[5].GetFilePath(), "/2018/05/12/FLS/201805122004.KTFX_FLS_TFX.505.txt")
+        assertNotNull(advisory[5].GetCounties())
+        assertEquals(advisory[5].GetCounties(), Arrays.asList("MTC001","MTC057"))
+
+        assertNotNull(advisory[6])
+        assertNotNull(advisory[6].GetType())
+        assertEquals(advisory[6].GetType(), AdvisoryModel.AdvisoryType.FL)
+        assertEquals(advisory[6].GetType().toString(), "Flood")
+        assertNotNull(advisory[6].GetLevel())
+        assertEquals(advisory[6].GetLevel(), AdvisoryModel.AdvisoryLevel.W)
+        assertEquals(advisory[6].GetLevel().toString(), "Warning")
+        assertNotNull(advisory[6].GetFilePath())
+        assertEquals(advisory[6].GetFilePath(), "/2018/05/12/FLS/201805122236.KTFX_FLS_TFX.554.txt")
+        assertNotNull(advisory[6].GetCounties())
+        assertEquals(advisory[6].GetCounties(), Arrays.asList("MTC007","MTC031"))
+
+        assertNotNull(advisory[7])
+        assertNotNull(advisory[7].GetType())
+        assertEquals(advisory[7].GetType(), AdvisoryModel.AdvisoryType.FA)
+        assertEquals(advisory[7].GetType().toString(), "Areal Flood")
+        assertNotNull(advisory[7].GetLevel())
+        assertEquals(advisory[7].GetLevel(), AdvisoryModel.AdvisoryLevel.W)
+        assertEquals(advisory[7].GetLevel().toString(), "Warning")
+        assertNotNull(advisory[7].GetFilePath())
+        assertEquals(advisory[7].GetFilePath(), "/2018/05/12/FLS/201805120743.KTFX_FLS_TFX.450.txt")
+        assertNotNull(advisory[7].GetCounties())
+        assertEquals(advisory[7].GetCounties(), Arrays.asList("MTC013"))
+    }
+
+
+    @Test fun InterruptedAdvisoryFileTest3()
+    {
+        val advisory = mAdvisoryCreator.ParseAdvisoryFile("FF.A;1527116400;1526252400;1526252400;/2018/05/12/FFA/201805122254.KOTX_FFA_OTX.401.txt;WAC047;\n" +
+                "SE.W;1526212800;1526212800;1526212800;/2018/05/13/MWW/201805130315.KMFR_MWW_MFR.388.txt;PZZ356,PZZ376,PZZ370,PZZ350;\n" +
+                "SC.Y;1526212800;1526207400;1526207400;/2018/05/12/MWW/201805122119.KMFR_MWW_MFR.114.txt;PZZ350;\n" +
+                "WS.W;1526209200;1526209200;1526209200;/2018/05/12/WSW/201805122114.KRIW_WSW_RIW.644.txt;WYZ014,WYZ015,WYZ002;\n" +
+                "ERROR!!! ERROR!!! ERROR!!!" +
+                "WW.Y;1526209200;1526209200;1526209200;/2018/05/12/WSW/201805122114.KRIW_WSW_RIW.644.txt;WYZ012,WYZ024;\n" +
+                "FL.W;0;1526209380;0;/2018/05/12/FLS/201805122004.KTFX_FLS_TFX.505.txt;MTC001,MTC057;45.47,-112.71,45.59,-112.73,45.58,-112.65,45.48,-112.65\n" +
+                "FL.W;1526342400;1526218500;1526218500;/2018/05/12/FLS/201805122236.KTFX_FLS_TFX.554.txt;MTC007,MTC031;45.86,-111.62,45.88,-111.63,45.91,-111.61,45.92,-111.56,45.90,-111.54\n" +
+                "FA.W;1526325300;1526325300;1526325300;/2018/05/12/FLS/201805120743.KTFX_FLS_TFX.450.txt;MTC013;47.43,-111.47,47.39,-111.43,47.33,-111.41,47.25,-111.37,47.20,-111.34,47.14,-111.26,47.13,-111.30,47.16,-111.36,47.19,-111.41,47.24,-111.44,47.28,-111.46,47.35,-111.47,47.43,-111.50")
+
+        assertNotNull(advisory)
+        assertEquals(advisory.size, 8)
+        assertNotNull(advisory[0])
+        assertNotNull(advisory[0].GetType())
+        assertEquals(advisory[0].GetType(), AdvisoryModel.AdvisoryType.FF)
+        assertEquals(advisory[0].GetType().toString(), "Flash Flood")
+        assertNotNull(advisory[0].GetLevel())
+        assertEquals(advisory[0].GetLevel(), AdvisoryModel.AdvisoryLevel.A)
+        assertEquals(advisory[0].GetLevel().toString(), "Watch")
+        assertNotNull(advisory[0].GetFilePath())
+        assertEquals(advisory[0].GetFilePath(), "/2018/05/12/FFA/201805122254.KOTX_FFA_OTX.401.txt")
+        assertNotNull(advisory[0].GetCounties())
+        assertEquals(advisory[0].GetCounties(), Arrays.asList("WAC047"))
+
+        assertNotNull(advisory[1])
+        assertNotNull(advisory[1].GetType())
+        assertEquals(advisory[1].GetType(), AdvisoryModel.AdvisoryType.SE)
+        assertEquals(advisory[1].GetType().toString(), "Hazardous Seas")
+        assertNotNull(advisory[1].GetLevel())
+        assertEquals(advisory[1].GetLevel(), AdvisoryModel.AdvisoryLevel.W)
+        assertEquals(advisory[1].GetLevel().toString(), "Warning")
+        assertNotNull(advisory[1].GetFilePath())
+        assertEquals(advisory[1].GetFilePath(), "/2018/05/13/MWW/201805130315.KMFR_MWW_MFR.388.txt")
+        assertNotNull(advisory[1].GetCounties())
+        assertEquals(advisory[1].GetCounties(), Arrays.asList("PZZ356","PZZ376","PZZ370","PZZ350"))
+
+        assertNotNull(advisory[2])
+        assertNotNull(advisory[2].GetType())
+        assertEquals(advisory[2].GetType(), AdvisoryModel.AdvisoryType.SC)
+        assertEquals(advisory[2].GetType().toString(), "Small Craft")
+        assertNotNull(advisory[2].GetLevel())
+        assertEquals(advisory[2].GetLevel(), AdvisoryModel.AdvisoryLevel.Y)
+        assertEquals(advisory[2].GetLevel().toString(), "Advisory")
+        assertNotNull(advisory[2].GetFilePath())
+        assertEquals(advisory[2].GetFilePath(), "/2018/05/12/MWW/201805122119.KMFR_MWW_MFR.114.txt")
+        assertNotNull(advisory[2].GetCounties())
+        assertEquals(advisory[2].GetCounties(), Arrays.asList("PZZ350"))
+
+        assertNotNull(advisory[3])
+        assertNotNull(advisory[3].GetType())
+        assertEquals(advisory[3].GetType(), AdvisoryModel.AdvisoryType.WS)
+        assertEquals(advisory[3].GetType().toString(), "Winter Storm")
+        assertNotNull(advisory[3].GetLevel())
+        assertEquals(advisory[3].GetLevel(), AdvisoryModel.AdvisoryLevel.W)
+        assertEquals(advisory[3].GetLevel().toString(), "Warning")
+        assertNotNull(advisory[3].GetFilePath())
+        assertEquals(advisory[3].GetFilePath(), "/2018/05/12/WSW/201805122114.KRIW_WSW_RIW.644.txt")
+        assertNotNull(advisory[3].GetCounties())
+        assertEquals(advisory[3].GetCounties(), Arrays.asList("WYZ014","WYZ015","WYZ002"))
+
+        assertNotNull(advisory[4])
+        assertNotNull(advisory[4].GetType())
+        assertEquals(advisory[4].GetType(), AdvisoryModel.AdvisoryType.WW)
+        assertEquals(advisory[4].GetType().toString(), "Winter Weather")
+        assertNotNull(advisory[4].GetLevel())
+        assertEquals(advisory[4].GetLevel(), AdvisoryModel.AdvisoryLevel.Y)
+        assertEquals(advisory[4].GetLevel().toString(), "Advisory")
+        assertNotNull(advisory[4].GetFilePath())
+        assertEquals(advisory[4].GetFilePath(), "/2018/05/12/WSW/201805122114.KRIW_WSW_RIW.644.txt")
+        assertNotNull(advisory[4].GetCounties())
+        assertEquals(advisory[4].GetCounties(), Arrays.asList("WYZ012","WYZ024"))
+
+        assertNotNull(advisory[5])
+        assertNotNull(advisory[5].GetType())
+        assertEquals(advisory[5].GetType(), AdvisoryModel.AdvisoryType.FL)
+        assertEquals(advisory[5].GetType().toString(), "Flood")
+        assertNotNull(advisory[5].GetLevel())
+        assertEquals(advisory[5].GetLevel(), AdvisoryModel.AdvisoryLevel.W)
+        assertEquals(advisory[5].GetLevel().toString(), "Warning")
+        assertNotNull(advisory[5].GetFilePath())
+        assertEquals(advisory[5].GetFilePath(), "/2018/05/12/FLS/201805122004.KTFX_FLS_TFX.505.txt")
+        assertNotNull(advisory[5].GetCounties())
+        assertEquals(advisory[5].GetCounties(), Arrays.asList("MTC001","MTC057"))
+
+        assertNotNull(advisory[6])
+        assertNotNull(advisory[6].GetType())
+        assertEquals(advisory[6].GetType(), AdvisoryModel.AdvisoryType.FL)
+        assertEquals(advisory[6].GetType().toString(), "Flood")
+        assertNotNull(advisory[6].GetLevel())
+        assertEquals(advisory[6].GetLevel(), AdvisoryModel.AdvisoryLevel.W)
+        assertEquals(advisory[6].GetLevel().toString(), "Warning")
+        assertNotNull(advisory[6].GetFilePath())
+        assertEquals(advisory[6].GetFilePath(), "/2018/05/12/FLS/201805122236.KTFX_FLS_TFX.554.txt")
+        assertNotNull(advisory[6].GetCounties())
+        assertEquals(advisory[6].GetCounties(), Arrays.asList("MTC007","MTC031"))
+
+        assertNotNull(advisory[7])
+        assertNotNull(advisory[7].GetType())
+        assertEquals(advisory[7].GetType(), AdvisoryModel.AdvisoryType.FA)
+        assertEquals(advisory[7].GetType().toString(), "Areal Flood")
+        assertNotNull(advisory[7].GetLevel())
+        assertEquals(advisory[7].GetLevel(), AdvisoryModel.AdvisoryLevel.W)
+        assertEquals(advisory[7].GetLevel().toString(), "Warning")
+        assertNotNull(advisory[7].GetFilePath())
+        assertEquals(advisory[7].GetFilePath(), "/2018/05/12/FLS/201805120743.KTFX_FLS_TFX.450.txt")
+        assertNotNull(advisory[7].GetCounties())
+        assertEquals(advisory[7].GetCounties(), Arrays.asList("MTC013"))
+    }
+
+
+    @Test fun InterruptedAdvisoryFileTest4()
+    {
+        val advisory = mAdvisoryCreator.ParseAdvisoryFile("FF.A;1527116400;1526252400;1526252400;/2018/05/12/FFA/201805122254.KOTX_FFA_OTX.401.txt;WAC047;\n" +
+                "SE.W;1526212800;1526212800;1526212800;/2018/05/13/MWW/201805130315.KMFR_MWW_MFR.388.txt;PZZ356,PZZ376,PZZ370,PZZ350;\n" +
+                "SC.Y;1526212800;1526207400;1526207400;/2018/05/12/MWW/201805122119.KMFR_MWW_MFR.114.txt;PZZ350;\n" +
+                "WS.W;1526209200;1526209200;1526209200;/2018/05/12/WSW/201805122114.KRIW_WSW_RIW.644.txt;WYZ014,WYZ015,WYZ002;" +
+                "ERROR!!! ERROR!!! ERROR!!!\n" +
+                "WW.Y;1526209200;1526209200;1526209200;/2018/05/12/WSW/201805122114.KRIW_WSW_RIW.644.txt;WYZ012,WYZ024;\n" +
+                "FL.W;0;1526209380;0;/2018/05/12/FLS/201805122004.KTFX_FLS_TFX.505.txt;MTC001,MTC057;45.47,-112.71,45.59,-112.73,45.58,-112.65,45.48,-112.65\n" +
+                "FL.W;1526342400;1526218500;1526218500;/2018/05/12/FLS/201805122236.KTFX_FLS_TFX.554.txt;MTC007,MTC031;45.86,-111.62,45.88,-111.63,45.91,-111.61,45.92,-111.56,45.90,-111.54\n" +
+                "FA.W;1526325300;1526325300;1526325300;/2018/05/12/FLS/201805120743.KTFX_FLS_TFX.450.txt;MTC013;47.43,-111.47,47.39,-111.43,47.33,-111.41,47.25,-111.37,47.20,-111.34,47.14,-111.26,47.13,-111.30,47.16,-111.36,47.19,-111.41,47.24,-111.44,47.28,-111.46,47.35,-111.47,47.43,-111.50")
+
+        assertNotNull(advisory)
+        assertEquals(advisory.size, 8)
+        assertNotNull(advisory[0])
+        assertNotNull(advisory[0].GetType())
+        assertEquals(advisory[0].GetType(), AdvisoryModel.AdvisoryType.FF)
+        assertEquals(advisory[0].GetType().toString(), "Flash Flood")
+        assertNotNull(advisory[0].GetLevel())
+        assertEquals(advisory[0].GetLevel(), AdvisoryModel.AdvisoryLevel.A)
+        assertEquals(advisory[0].GetLevel().toString(), "Watch")
+        assertNotNull(advisory[0].GetFilePath())
+        assertEquals(advisory[0].GetFilePath(), "/2018/05/12/FFA/201805122254.KOTX_FFA_OTX.401.txt")
+        assertNotNull(advisory[0].GetCounties())
+        assertEquals(advisory[0].GetCounties(), Arrays.asList("WAC047"))
+
+        assertNotNull(advisory[1])
+        assertNotNull(advisory[1].GetType())
+        assertEquals(advisory[1].GetType(), AdvisoryModel.AdvisoryType.SE)
+        assertEquals(advisory[1].GetType().toString(), "Hazardous Seas")
+        assertNotNull(advisory[1].GetLevel())
+        assertEquals(advisory[1].GetLevel(), AdvisoryModel.AdvisoryLevel.W)
+        assertEquals(advisory[1].GetLevel().toString(), "Warning")
+        assertNotNull(advisory[1].GetFilePath())
+        assertEquals(advisory[1].GetFilePath(), "/2018/05/13/MWW/201805130315.KMFR_MWW_MFR.388.txt")
+        assertNotNull(advisory[1].GetCounties())
+        assertEquals(advisory[1].GetCounties(), Arrays.asList("PZZ356","PZZ376","PZZ370","PZZ350"))
+
+        assertNotNull(advisory[2])
+        assertNotNull(advisory[2].GetType())
+        assertEquals(advisory[2].GetType(), AdvisoryModel.AdvisoryType.SC)
+        assertEquals(advisory[2].GetType().toString(), "Small Craft")
+        assertNotNull(advisory[2].GetLevel())
+        assertEquals(advisory[2].GetLevel(), AdvisoryModel.AdvisoryLevel.Y)
+        assertEquals(advisory[2].GetLevel().toString(), "Advisory")
+        assertNotNull(advisory[2].GetFilePath())
+        assertEquals(advisory[2].GetFilePath(), "/2018/05/12/MWW/201805122119.KMFR_MWW_MFR.114.txt")
+        assertNotNull(advisory[2].GetCounties())
+        assertEquals(advisory[2].GetCounties(), Arrays.asList("PZZ350"))
+
+        assertNotNull(advisory[3])
+        assertNotNull(advisory[3].GetType())
+        assertEquals(advisory[3].GetType(), AdvisoryModel.AdvisoryType.WS)
+        assertEquals(advisory[3].GetType().toString(), "Winter Storm")
+        assertNotNull(advisory[3].GetLevel())
+        assertEquals(advisory[3].GetLevel(), AdvisoryModel.AdvisoryLevel.W)
+        assertEquals(advisory[3].GetLevel().toString(), "Warning")
+        assertNotNull(advisory[3].GetFilePath())
+        assertEquals(advisory[3].GetFilePath(), "/2018/05/12/WSW/201805122114.KRIW_WSW_RIW.644.txt")
+        assertNotNull(advisory[3].GetCounties())
+        assertEquals(advisory[3].GetCounties(), Arrays.asList("WYZ014","WYZ015","WYZ002"))
+
+        assertNotNull(advisory[4])
+        assertNotNull(advisory[4].GetType())
+        assertEquals(advisory[4].GetType(), AdvisoryModel.AdvisoryType.WW)
+        assertEquals(advisory[4].GetType().toString(), "Winter Weather")
+        assertNotNull(advisory[4].GetLevel())
+        assertEquals(advisory[4].GetLevel(), AdvisoryModel.AdvisoryLevel.Y)
+        assertEquals(advisory[4].GetLevel().toString(), "Advisory")
+        assertNotNull(advisory[4].GetFilePath())
+        assertEquals(advisory[4].GetFilePath(), "/2018/05/12/WSW/201805122114.KRIW_WSW_RIW.644.txt")
+        assertNotNull(advisory[4].GetCounties())
+        assertEquals(advisory[4].GetCounties(), Arrays.asList("WYZ012","WYZ024"))
+
+        assertNotNull(advisory[5])
+        assertNotNull(advisory[5].GetType())
+        assertEquals(advisory[5].GetType(), AdvisoryModel.AdvisoryType.FL)
+        assertEquals(advisory[5].GetType().toString(), "Flood")
+        assertNotNull(advisory[5].GetLevel())
+        assertEquals(advisory[5].GetLevel(), AdvisoryModel.AdvisoryLevel.W)
+        assertEquals(advisory[5].GetLevel().toString(), "Warning")
+        assertNotNull(advisory[5].GetFilePath())
+        assertEquals(advisory[5].GetFilePath(), "/2018/05/12/FLS/201805122004.KTFX_FLS_TFX.505.txt")
+        assertNotNull(advisory[5].GetCounties())
+        assertEquals(advisory[5].GetCounties(), Arrays.asList("MTC001","MTC057"))
+
+        assertNotNull(advisory[6])
+        assertNotNull(advisory[6].GetType())
+        assertEquals(advisory[6].GetType(), AdvisoryModel.AdvisoryType.FL)
+        assertEquals(advisory[6].GetType().toString(), "Flood")
+        assertNotNull(advisory[6].GetLevel())
+        assertEquals(advisory[6].GetLevel(), AdvisoryModel.AdvisoryLevel.W)
+        assertEquals(advisory[6].GetLevel().toString(), "Warning")
+        assertNotNull(advisory[6].GetFilePath())
+        assertEquals(advisory[6].GetFilePath(), "/2018/05/12/FLS/201805122236.KTFX_FLS_TFX.554.txt")
+        assertNotNull(advisory[6].GetCounties())
+        assertEquals(advisory[6].GetCounties(), Arrays.asList("MTC007","MTC031"))
+
+        assertNotNull(advisory[7])
+        assertNotNull(advisory[7].GetType())
+        assertEquals(advisory[7].GetType(), AdvisoryModel.AdvisoryType.FA)
+        assertEquals(advisory[7].GetType().toString(), "Areal Flood")
+        assertNotNull(advisory[7].GetLevel())
+        assertEquals(advisory[7].GetLevel(), AdvisoryModel.AdvisoryLevel.W)
+        assertEquals(advisory[7].GetLevel().toString(), "Warning")
+        assertNotNull(advisory[7].GetFilePath())
+        assertEquals(advisory[7].GetFilePath(), "/2018/05/12/FLS/201805120743.KTFX_FLS_TFX.450.txt")
+        assertNotNull(advisory[7].GetCounties())
+        assertEquals(advisory[7].GetCounties(), Arrays.asList("MTC013"))
+    }
+
+
+    @Test fun BadFormatAdvisoryFileTest()
+    {
+        val advisory = mAdvisoryCreator.ParseAdvisoryFile("bad format.A;1527116400;1526252400;1526252400;/2018/05/12/FFA/201805122254.KOTX_FFA_OTX.401.txt;WAC047;\n" +
+                "SE.bad format;1526212800;1526212800;1526212800;/2018/05/13/MWW/201805130315.KMFR_MWW_MFR.388.txt;PZZ356,PZZ376,PZZ370,PZZ350;\n" +
+                "SC.Y;bad format;1526207400;1526207400;/2018/05/12/MWW/201805122119.KMFR_MWW_MFR.114.txt;PZZ350;\n" +
+                "WS.W;1526209200;bad format;1526209200;/2018/05/12/WSW/201805122114.KRIW_WSW_RIW.644.txt;WYZ014,WYZ015,WYZ002;\n" +
+                "WW.Y;1526209200;1526209200;bad format;/2018/05/12/WSW/201805122114.KRIW_WSW_RIW.644.txt;WYZ012,WYZ024;\n" +
+                "FL.W;0;1526209380;0;bad format;MTC001,MTC057;45.47,-112.71,45.59,-112.73,45.58,-112.65,45.48,-112.65\n" +
+                "FL.W;1526342400;1526218500;1526218500;/2018/05/12/FLS/201805122236.KTFX_FLS_TFX.554.txt;bad format,MTC031;45.86,-111.62,45.88,-111.63,45.91,-111.61,45.92,-111.56,45.90,-111.54\n" +
+                "FA.W;1526325300;1526325300;1526325300;/2018/05/12/FLS/201805120743.KTFX_FLS_TFX.450.txt;MTC013;bad format,-111.47,47.39,-111.43,47.33,-111.41,47.25,-111.37,47.20,-111.34,47.14,-111.26,47.13,-111.30,47.16,-111.36,47.19,-111.41,47.24,-111.44,47.28,-111.46,47.35,-111.47,47.43,-111.50")
+
+        assertNotNull(advisory)
+        assertEquals(advisory.size, 8)
+        assertNotNull(advisory[0])
+        assertNull(advisory[0].GetType())
+        assertNull(advisory[0].GetLevel())
+        assertNotNull(advisory[0].GetFilePath())
+        assertEquals(advisory[0].GetFilePath(), "/2018/05/12/FFA/201805122254.KOTX_FFA_OTX.401.txt")
+        assertNotNull(advisory[0].GetCounties())
+        assertEquals(advisory[0].GetCounties(), Arrays.asList("WAC047"))
+
+        assertNotNull(advisory[1])
+        assertNull(advisory[1].GetType())
+        assertNull(advisory[1].GetLevel())
+        assertNotNull(advisory[1].GetFilePath())
+        assertEquals(advisory[1].GetFilePath(), "/2018/05/13/MWW/201805130315.KMFR_MWW_MFR.388.txt")
+        assertNotNull(advisory[1].GetCounties())
+        assertEquals(advisory[1].GetCounties(), Arrays.asList("PZZ356","PZZ376","PZZ370","PZZ350"))
+
+        assertNotNull(advisory[2])
+        assertNotNull(advisory[2].GetType())
+        assertEquals(advisory[2].GetType(), AdvisoryModel.AdvisoryType.SC)
+        assertEquals(advisory[2].GetType().toString(), "Small Craft")
+        assertNotNull(advisory[2].GetLevel())
+        assertEquals(advisory[2].GetLevel(), AdvisoryModel.AdvisoryLevel.Y)
+        assertEquals(advisory[2].GetLevel().toString(), "Advisory")
+        assertNotNull(advisory[2].GetFilePath())
+        assertEquals(advisory[2].GetFilePath(), "/2018/05/12/MWW/201805122119.KMFR_MWW_MFR.114.txt")
+        assertNotNull(advisory[2].GetCounties())
+        assertEquals(advisory[2].GetCounties(), Arrays.asList("PZZ350"))
+
+        assertNotNull(advisory[3])
+        assertNotNull(advisory[3].GetType())
+        assertEquals(advisory[3].GetType(), AdvisoryModel.AdvisoryType.WS)
+        assertEquals(advisory[3].GetType().toString(), "Winter Storm")
+        assertNotNull(advisory[3].GetLevel())
+        assertEquals(advisory[3].GetLevel(), AdvisoryModel.AdvisoryLevel.W)
+        assertEquals(advisory[3].GetLevel().toString(), "Warning")
+        assertNotNull(advisory[3].GetFilePath())
+        assertEquals(advisory[3].GetFilePath(), "/2018/05/12/WSW/201805122114.KRIW_WSW_RIW.644.txt")
+        assertNotNull(advisory[3].GetCounties())
+        assertEquals(advisory[3].GetCounties(), Arrays.asList("WYZ014","WYZ015","WYZ002"))
+
+        assertNotNull(advisory[4])
+        assertNotNull(advisory[4].GetType())
+        assertEquals(advisory[4].GetType(), AdvisoryModel.AdvisoryType.WW)
+        assertEquals(advisory[4].GetType().toString(), "Winter Weather")
+        assertNotNull(advisory[4].GetLevel())
+        assertEquals(advisory[4].GetLevel(), AdvisoryModel.AdvisoryLevel.Y)
+        assertEquals(advisory[4].GetLevel().toString(), "Advisory")
+        assertNotNull(advisory[4].GetFilePath())
+        assertEquals(advisory[4].GetFilePath(), "/2018/05/12/WSW/201805122114.KRIW_WSW_RIW.644.txt")
+        assertNotNull(advisory[4].GetCounties())
+        assertEquals(advisory[4].GetCounties(), Arrays.asList("WYZ012","WYZ024"))
+
+        assertNotNull(advisory[5])
+        assertNotNull(advisory[5].GetType())
+        assertEquals(advisory[5].GetType(), AdvisoryModel.AdvisoryType.FL)
+        assertEquals(advisory[5].GetType().toString(), "Flood")
+        assertNotNull(advisory[5].GetLevel())
+        assertEquals(advisory[5].GetLevel(), AdvisoryModel.AdvisoryLevel.W)
+        assertEquals(advisory[5].GetLevel().toString(), "Warning")
+        assertNotNull(advisory[5].GetFilePath())
+        assertEquals(advisory[5].GetFilePath(), "bad format")
+        assertNotNull(advisory[5].GetCounties())
+        assertEquals(advisory[5].GetCounties(), Arrays.asList("MTC001","MTC057"))
+
+        assertNotNull(advisory[6])
+        assertNotNull(advisory[6].GetType())
+        assertEquals(advisory[6].GetType(), AdvisoryModel.AdvisoryType.FL)
+        assertEquals(advisory[6].GetType().toString(), "Flood")
+        assertNotNull(advisory[6].GetLevel())
+        assertEquals(advisory[6].GetLevel(), AdvisoryModel.AdvisoryLevel.W)
+        assertEquals(advisory[6].GetLevel().toString(), "Warning")
+        assertNotNull(advisory[6].GetFilePath())
+        assertEquals(advisory[6].GetFilePath(), "/2018/05/12/FLS/201805122236.KTFX_FLS_TFX.554.txt")
+        assertNotNull(advisory[6].GetCounties())
+        assertEquals(advisory[6].GetCounties(), Arrays.asList("bad format","MTC031"))
+
+        assertNotNull(advisory[7])
+        assertNotNull(advisory[7].GetType())
+        assertEquals(advisory[7].GetType(), AdvisoryModel.AdvisoryType.FA)
+        assertEquals(advisory[7].GetType().toString(), "Areal Flood")
+        assertNotNull(advisory[7].GetLevel())
+        assertEquals(advisory[7].GetLevel(), AdvisoryModel.AdvisoryLevel.W)
+        assertEquals(advisory[7].GetLevel().toString(), "Warning")
+        assertNotNull(advisory[7].GetFilePath())
+        assertEquals(advisory[7].GetFilePath(), "/2018/05/12/FLS/201805120743.KTFX_FLS_TFX.450.txt")
+        assertNotNull(advisory[7].GetCounties())
+        assertEquals(advisory[7].GetCounties(), Arrays.asList("MTC013"))
+    }
+
+
+    @Test fun GoodAdvisoryFileTest()
+    {
+        val advisory = mAdvisoryCreator.ParseAdvisoryFile("FF.A;1527116400;1526252400;1526252400;/2018/05/12/FFA/201805122254.KOTX_FFA_OTX.401.txt;WAC047;\n" +
+                "SE.W;1526212800;1526212800;1526212800;/2018/05/13/MWW/201805130315.KMFR_MWW_MFR.388.txt;PZZ356,PZZ376,PZZ370,PZZ350;\n" +
+                "SC.Y;1526212800;1526207400;1526207400;/2018/05/12/MWW/201805122119.KMFR_MWW_MFR.114.txt;PZZ350;\n" +
+                "WS.W;1526209200;1526209200;1526209200;/2018/05/12/WSW/201805122114.KRIW_WSW_RIW.644.txt;WYZ014,WYZ015,WYZ002;\n" +
+                "WW.Y;1526209200;1526209200;1526209200;/2018/05/12/WSW/201805122114.KRIW_WSW_RIW.644.txt;WYZ012,WYZ024;\n" +
+                "FL.W;0;1526209380;0;/2018/05/12/FLS/201805122004.KTFX_FLS_TFX.505.txt;MTC001,MTC057;45.47,-112.71,45.59,-112.73,45.58,-112.65,45.48,-112.65\n" +
+                "FL.W;1526342400;1526218500;1526218500;/2018/05/12/FLS/201805122236.KTFX_FLS_TFX.554.txt;MTC007,MTC031;45.86,-111.62,45.88,-111.63,45.91,-111.61,45.92,-111.56,45.90,-111.54\n" +
+                "FA.W;1526325300;1526325300;1526325300;/2018/05/12/FLS/201805120743.KTFX_FLS_TFX.450.txt;MTC013;47.43,-111.47,47.39,-111.43,47.33,-111.41,47.25,-111.37,47.20,-111.34,47.14,-111.26,47.13,-111.30,47.16,-111.36,47.19,-111.41,47.24,-111.44,47.28,-111.46,47.35,-111.47,47.43,-111.50")
+
+        assertNotNull(advisory)
+        assertEquals(advisory.size, 8)
+        assertNotNull(advisory[0])
+        assertNotNull(advisory[0].GetType())
+        assertEquals(advisory[0].GetType(), AdvisoryModel.AdvisoryType.FF)
+        assertEquals(advisory[0].GetType().toString(), "Flash Flood")
+        assertNotNull(advisory[0].GetLevel())
+        assertEquals(advisory[0].GetLevel(), AdvisoryModel.AdvisoryLevel.A)
+        assertEquals(advisory[0].GetLevel().toString(), "Watch")
+        assertNotNull(advisory[0].GetFilePath())
+        assertEquals(advisory[0].GetFilePath(), "/2018/05/12/FFA/201805122254.KOTX_FFA_OTX.401.txt")
+        assertNotNull(advisory[0].GetCounties())
+        assertEquals(advisory[0].GetCounties(), Arrays.asList("WAC047"))
+
+        assertNotNull(advisory[1])
+        assertNotNull(advisory[1].GetType())
+        assertEquals(advisory[1].GetType(), AdvisoryModel.AdvisoryType.SE)
+        assertEquals(advisory[1].GetType().toString(), "Hazardous Seas")
+        assertNotNull(advisory[1].GetLevel())
+        assertEquals(advisory[1].GetLevel(), AdvisoryModel.AdvisoryLevel.W)
+        assertEquals(advisory[1].GetLevel().toString(), "Warning")
+        assertNotNull(advisory[1].GetFilePath())
+        assertEquals(advisory[1].GetFilePath(), "/2018/05/13/MWW/201805130315.KMFR_MWW_MFR.388.txt")
+        assertNotNull(advisory[1].GetCounties())
+        assertEquals(advisory[1].GetCounties(), Arrays.asList("PZZ356","PZZ376","PZZ370","PZZ350"))
+
+        assertNotNull(advisory[2])
+        assertNotNull(advisory[2].GetType())
+        assertEquals(advisory[2].GetType(), AdvisoryModel.AdvisoryType.SC)
+        assertEquals(advisory[2].GetType().toString(), "Small Craft")
+        assertNotNull(advisory[2].GetLevel())
+        assertEquals(advisory[2].GetLevel(), AdvisoryModel.AdvisoryLevel.Y)
+        assertEquals(advisory[2].GetLevel().toString(), "Advisory")
+        assertNotNull(advisory[2].GetFilePath())
+        assertEquals(advisory[2].GetFilePath(), "/2018/05/12/MWW/201805122119.KMFR_MWW_MFR.114.txt")
+        assertNotNull(advisory[2].GetCounties())
+        assertEquals(advisory[2].GetCounties(), Arrays.asList("PZZ350"))
+
+        assertNotNull(advisory[3])
+        assertNotNull(advisory[3].GetType())
+        assertEquals(advisory[3].GetType(), AdvisoryModel.AdvisoryType.WS)
+        assertEquals(advisory[3].GetType().toString(), "Winter Storm")
+        assertNotNull(advisory[3].GetLevel())
+        assertEquals(advisory[3].GetLevel(), AdvisoryModel.AdvisoryLevel.W)
+        assertEquals(advisory[3].GetLevel().toString(), "Warning")
+        assertNotNull(advisory[3].GetFilePath())
+        assertEquals(advisory[3].GetFilePath(), "/2018/05/12/WSW/201805122114.KRIW_WSW_RIW.644.txt")
+        assertNotNull(advisory[3].GetCounties())
+        assertEquals(advisory[3].GetCounties(), Arrays.asList("WYZ014","WYZ015","WYZ002"))
+
+        assertNotNull(advisory[4])
+        assertNotNull(advisory[4].GetType())
+        assertEquals(advisory[4].GetType(), AdvisoryModel.AdvisoryType.WW)
+        assertEquals(advisory[4].GetType().toString(), "Winter Weather")
+        assertNotNull(advisory[4].GetLevel())
+        assertEquals(advisory[4].GetLevel(), AdvisoryModel.AdvisoryLevel.Y)
+        assertEquals(advisory[4].GetLevel().toString(), "Advisory")
+        assertNotNull(advisory[4].GetFilePath())
+        assertEquals(advisory[4].GetFilePath(), "/2018/05/12/WSW/201805122114.KRIW_WSW_RIW.644.txt")
+        assertNotNull(advisory[4].GetCounties())
+        assertEquals(advisory[4].GetCounties(), Arrays.asList("WYZ012","WYZ024"))
+
+        assertNotNull(advisory[5])
+        assertNotNull(advisory[5].GetType())
+        assertEquals(advisory[5].GetType(), AdvisoryModel.AdvisoryType.FL)
+        assertEquals(advisory[5].GetType().toString(), "Flood")
+        assertNotNull(advisory[5].GetLevel())
+        assertEquals(advisory[5].GetLevel(), AdvisoryModel.AdvisoryLevel.W)
+        assertEquals(advisory[5].GetLevel().toString(), "Warning")
+        assertNotNull(advisory[5].GetFilePath())
+        assertEquals(advisory[5].GetFilePath(), "/2018/05/12/FLS/201805122004.KTFX_FLS_TFX.505.txt")
+        assertNotNull(advisory[5].GetCounties())
+        assertEquals(advisory[5].GetCounties(), Arrays.asList("MTC001","MTC057"))
+
+        assertNotNull(advisory[6])
+        assertNotNull(advisory[6].GetType())
+        assertEquals(advisory[6].GetType(), AdvisoryModel.AdvisoryType.FL)
+        assertEquals(advisory[6].GetType().toString(), "Flood")
+        assertNotNull(advisory[6].GetLevel())
+        assertEquals(advisory[6].GetLevel(), AdvisoryModel.AdvisoryLevel.W)
+        assertEquals(advisory[6].GetLevel().toString(), "Warning")
+        assertNotNull(advisory[6].GetFilePath())
+        assertEquals(advisory[6].GetFilePath(), "/2018/05/12/FLS/201805122236.KTFX_FLS_TFX.554.txt")
+        assertNotNull(advisory[6].GetCounties())
+        assertEquals(advisory[6].GetCounties(), Arrays.asList("MTC007","MTC031"))
+
+        assertNotNull(advisory[7])
+        assertNotNull(advisory[7].GetType())
+        assertEquals(advisory[7].GetType(), AdvisoryModel.AdvisoryType.FA)
+        assertEquals(advisory[7].GetType().toString(), "Areal Flood")
+        assertNotNull(advisory[7].GetLevel())
+        assertEquals(advisory[7].GetLevel(), AdvisoryModel.AdvisoryLevel.W)
+        assertEquals(advisory[7].GetLevel().toString(), "Warning")
+        assertNotNull(advisory[7].GetFilePath())
+        assertEquals(advisory[7].GetFilePath(), "/2018/05/12/FLS/201805120743.KTFX_FLS_TFX.450.txt")
+        assertNotNull(advisory[7].GetCounties())
+        assertEquals(advisory[7].GetCounties(), Arrays.asList("MTC013"))
+    }
+}

@@ -1,0 +1,79 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+        <item name="android:textColorSecondaryInverse">@color/textColorPrimary</item>
+        <item name="android:textColorHint">@color/textColorPrimary</item>
+        <item name="android:editTextColor">@color/textColorPrimary</item>
+        <item name="android:actionOverflowButtonStyle">@style/OverflowButtonStyle</item>
+        <item name="android:actionOverflowMenuStyle">@style/OverflowMenuStyle</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+        <item name="android:alertDialogTheme">@style/Theme.AppCompat.Light.Dialog</item>
+    </style>
+
+    <!--<style name="AppAlertDialog" parent="AlertDialog.AppCompat.Light"></style>-->
+
+    <style name="OverflowButtonStyle" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:tint">@color/whiteTextColor</item>
+    </style>
+
+    <style name="OverflowMenuStyle" parent="Widget.AppCompat.PopupMenu.Overflow">
+        <item name="android:itemBackground">@color/colorPrimary</item>
+        <item name="android:popupBackground">@color/colorPrimary</item>
+    </style>
+
+    <style name="SearchViewStyle" parent="Widget.AppCompat.Light.SearchView">
+        <item name="android:searchIcon">@drawable/nfg</item>
+        <item name="android:editTextStyle">@style/SearchViewEditTextStyle</item>
+    </style>
+
+    <style name="SearchViewEditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="android:editTextColor">@color/whiteTextColor</item>
+        <item name="android:background">@color/whiteTextColor</item>
+    </style>
+
+    <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">@android:color/white</item>
+    </style>
+
+    <style name="WhiteToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Light">
+        <item name="colorControlHighlight">@color/colorAccent</item>
+    </style>
+
+    <style name="WebViewStyle" parent="android:Theme" >
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:windowIsFloating">false</item>
+    </style>
+
+    <style name="WebViewActivityTheme" parent="AppTheme">
+        <item name="android:windowAnimationStyle">@style/WebViewAnimation.Window</item>
+    </style>
+
+    <style name="WebViewAnimation.Window" parent="@android:style/Animation.Activity">
+        <item name="android:windowEnterAnimation">@anim/slide_from_bottom</item>
+        <item name="android:windowExitAnimation">@anim/slide_to_bottom</item>
+    </style>
+
+    <style name="MesonetCardToolbarStyle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">20sp</item>
+    </style>
+    <style name="myAlertDialog" parent="@android:style/Theme.Material.Light.Dialog.Alert">
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <!-- used in filter_list_fragment -->
+    <style name="StyledScrollerTextAppearance" parent="@android:style/TextAppearance">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+</resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/mesonetOption" android:title="Local" android:icon="@drawable/local_selector"/>
+    <item android:id="@+id/mapsOption" android:title="Maps" android:icon="@drawable/maps_selector"/>
+    <item android:id="@+id/radarOption" android:title="Radar" android:icon="@drawable/radar_selector"/>
+    <item android:id="@+id/advisoriesOption" android:title="Advisories" android:icon="@drawable/advisories_selector"/>
+</menu>
